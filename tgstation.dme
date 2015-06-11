@@ -37,6 +37,10 @@
 #define FILE_DIR "sound"
 #define FILE_DIR "sound/AI"
 #define FILE_DIR "sound/ambience"
+<<<<<<< HEAD
+#define FILE_DIR "sound/arcade"
+=======
+>>>>>>> mapping_test
 #define FILE_DIR "sound/effects"
 #define FILE_DIR "sound/guitar"
 #define FILE_DIR "sound/hallucinations"
@@ -509,6 +513,7 @@
 #include "code\game\machinery\doors\alarmlock.dm"
 #include "code\game\machinery\doors\brigdoors.dm"
 #include "code\game\machinery\doors\checkForMultipleDoors.dm"
+#include "code\game\machinery\doors\curtains.dm"
 #include "code\game\machinery\doors\door.dm"
 #include "code\game\machinery\doors\firedoor.dm"
 #include "code\game\machinery\doors\poddoor.dm"
