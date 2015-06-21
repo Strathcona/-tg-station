@@ -2213,7 +2213,7 @@
 "aQC" = (/obj/structure/table,/obj/item/weapon/paper_bin{pixel_x = -3; pixel_y = 7},/turf/simulated/floor/plasteel,/area/security/main)
 "aQD" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/security{name = "Evidence Storage"; req_access = null; req_access_txt = "0"; req_one_access_txt = "1;4"},/turf/simulated/floor/plasteel{tag = "icon-vault (WEST)"; icon_state = "vault"; dir = 8},/area/security/main)
 "aQE" = (/turf/simulated/floor/plasteel{tag = "icon-vault (WEST)"; icon_state = "vault"; dir = 8},/area/security/brig)
-"aQF" = (/obj/machinery/camera{c_tag = "Atmospherics - Port"; dir = 4; network = list("SS13")},/obj/machinery/light{dir = 8},/turf/simulated/floor/plasteel{dir = 8; icon_state = "caution"},/area/atmos)
+"aQF" = (/obj/structure/closet/fireaxecabinet{pixel_x = -32; pixel_y = 0},/obj/machinery/camera{c_tag = "Atmospherics - Port"; dir = 4; network = list("SS13")},/obj/machinery/light{dir = 8},/turf/simulated/floor/plasteel{dir = 8; icon_state = "caution"},/area/atmos)
 "aQG" = (/obj/machinery/atmospherics/pipe/manifold/cyan/visible{dir = 8; initialize_directions = 11},/turf/simulated/floor/plasteel,/area/atmos)
 "aQH" = (/obj/machinery/atmospherics/pipe/manifold/yellow/visible,/turf/simulated/floor/plasteel,/area/atmos)
 "aQI" = (/obj/machinery/atmospherics/pipe/simple/yellow/visible{tag = "icon-intact (SOUTHWEST)"; icon_state = "intact"; dir = 10},/turf/simulated/floor/plasteel,/area/atmos)
