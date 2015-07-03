@@ -1,0 +1,127 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/space,/area/shuttle/escape)
+"ac" = (/turf/simulated/wall,/area/hallway/primary/central)
+"ad" = (/obj/structure/grille,/obj/structure/window/reinforced/fulltile,/turf/simulated/floor/plating,/area/hallway/primary/central)
+"ae" = (/turf/simulated/floor/plasteel,/area/hallway/primary/central)
+"af" = (/obj/machinery/door/airlock/external{name = "Security Escape Airlock"; req_access_txt = "2"},/turf/simulated/floor/plating,/area/hallway/primary/central)
+"ag" = (/turf/simulated/floor/plating,/area/hallway/primary/central)
+"ah" = (/obj/structure/grille,/obj/structure/sign/securearea{desc = "A warning sign which reads 'KEEP CLEAR OF DOCKING AREA'."; name = "KEEP CLEAR: DOCKING AREA"; pixel_y = 0},/obj/structure/window/reinforced/fulltile,/turf/simulated/floor/plating,/area/hallway/primary/central)
+"ai" = (/obj/machinery/door/airlock/external{name = "Escape Airlock"},/obj/structure/sign/securearea{desc = "A warning sign which reads 'EXTERNAL AIRLOCK'"; icon_state = "space"; layer = 4; name = "EXTERNAL AIRLOCK"; pixel_x = 0; pixel_y = 32},/turf/simulated/floor/plating,/area/hallway/primary/central)
+"aj" = (/obj/machinery/door/airlock/external{name = "Escape Airlock"},/turf/simulated/floor/plating,/area/hallway/primary/central)
+"ak" = (/obj/docking_port/stationary{dir = 4; dwidth = 9; height = 11; id = "emergency_home"; name = "emergency evac bay"; width = 22},/turf/space,/area/shuttle/escape)
+"al" = (/obj/structure/lattice,/turf/space,/area/space)
+"am" = (/obj/machinery/door/airlock/external{name = "Cargo Escape Airlock"},/turf/simulated/floor/plating,/area/hallway/primary/central)
+"an" = (/turf/simulated/wall,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"ao" = (/obj/machinery/conveyor{tag = "icon-conveyor-1 (NORTHEAST)"; icon_state = "conveyor-1"; dir = 5; id = "garbage"},/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"ap" = (/obj/machinery/conveyor{tag = "icon-conveyor-1 (EAST)"; icon_state = "conveyor-1"; dir = 4; id = "QMLoad"},/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"aq" = (/obj/machinery/power/smes/magical{charge = 4e+006},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/plasteel,/area/hallway/primary/central)
+"ar" = (/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"as" = (/obj/machinery/conveyor{tag = "icon-conveyor-1"; icon_state = "conveyor-1"; dir = 2; id = "garbage"},/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"at" = (/obj/machinery/power/apc,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plasteel,/area/hallway/primary/central)
+"au" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"; tag = ""},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"; tag = "90Curve"},/turf/simulated/floor/plasteel,/area/hallway/primary/central)
+"av" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/turf/simulated/floor/plasteel,/area/hallway/primary/central)
+"aw" = (/obj/machinery/power/apc,/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plasteel,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"ax" = (/obj/machinery/conveyor{tag = "icon-conveyor-1 (SOUTHEAST)"; icon_state = "conveyor-1"; dir = 6; id = "garbage"},/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"ay" = (/obj/machinery/conveyor{dir = 8; id = "garbage"},/obj/machinery/recycler,/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"az" = (/obj/machinery/conveyor{tag = "icon-conveyor-1 (NORTHWEST)"; icon_state = "conveyor-1"; dir = 9; id = "garbage"},/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"aA" = (/obj/machinery/door/airlock/external{name = "Arrival Airlock"},/turf/simulated/floor/plating,/area/hallway/primary/central)
+"aB" = (/turf/space,/area/hallway/primary/central)
+"aC" = (/obj/machinery/conveyor{tag = "icon-conveyor-1 (SOUTHWEST)"; icon_state = "conveyor-1"; dir = 10; id = "garbage"},/turf/simulated/floor/plating,/area/assembly/showroom{name = "\improper Corporate Showroom"})
+"aD" = (/turf/space,/area/shuttle/arrival)
+"aE" = (/turf/simulated/wall/shuttle{tag = "icon-swall_s6"; icon_state = "swall_s6"; dir = 2},/area/shuttle/arrival)
+"aF" = (/turf/simulated/wall/shuttle{tag = "icon-swall12"; icon_state = "swall12"; dir = 2},/area/shuttle/arrival)
+"aG" = (/obj/machinery/door/airlock/shuttle{name = "Arrivals Shuttle Airlock"},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aH" = (/obj/structure/grille,/obj/structure/window/shuttle,/turf/simulated/floor/plating,/area/shuttle/arrival)
+"aI" = (/turf/simulated/wall/shuttle{tag = "icon-swall14"; icon_state = "swall14"; dir = 2},/area/shuttle/arrival)
+"aJ" = (/turf/simulated/wall/shuttle{tag = "icon-swall_s10"; icon_state = "swall_s10"; dir = 2},/area/shuttle/arrival)
+"aK" = (/turf/simulated/wall,/area/space)
+"aL" = (/turf/simulated/wall/shuttle{tag = "icon-swall11"; icon_state = "swall11"; dir = 2},/area/shuttle/arrival)
+"aM" = (/obj/structure/table,/obj/item/weapon/storage/firstaid/regular{pixel_x = 3; pixel_y = -3},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aN" = (/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aO" = (/obj/machinery/computer/arcade,/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aP" = (/obj/structure/closet/wardrobe/green,/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aQ" = (/obj/structure/closet/wardrobe/black,/obj/structure/sign/map/left{desc = "A framed picture of the station. Clockwise from security at the top (red), you see engineering (yellow), science (purple), escape (red and white), medbay (green), arrivals (blue and white), and finally cargo (brown)."; icon_state = "map-left-MS"; pixel_y = 32},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aR" = (/obj/structure/closet/wardrobe/mixed,/obj/structure/sign/map/right{desc = "A framed picture of the station. Clockwise from security at the top (red), you see engineering (yellow), science (purple), escape (red and white), medbay (green), arrivals (blue and white), and finally cargo (brown)."; icon_state = "map-right-MS"; pixel_y = 32},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aS" = (/obj/structure/closet/wardrobe/grey,/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aT" = (/obj/machinery/camera{c_tag = "Arrivals Shuttle"; dir = 2; network = list("SS13")},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aU" = (/turf/simulated/wall/shuttle{tag = "icon-swall7"; icon_state = "swall7"; dir = 2},/area/shuttle/arrival)
+"aV" = (/obj/structure/shuttle/engine/propulsion{tag = "icon-burst_r (WEST)"; icon_state = "burst_r"; dir = 8},/turf/simulated/floor/plating,/area/shuttle/arrival)
+"aW" = (/obj/structure/grille,/obj/structure/window/reinforced/fulltile,/turf/simulated/floor/plating,/area/space)
+"aX" = (/turf/simulated/wall/shuttle{icon_state = "swall3"; dir = 2},/area/shuttle/arrival)
+"aY" = (/obj/structure/stool/bed/chair,/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"aZ" = (/turf/simulated/wall/shuttle{tag = "icon-swall3"; icon_state = "swall3"; dir = 2},/area/shuttle/arrival)
+"ba" = (/obj/structure/stool/bed/chair{dir = 8},/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bb" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bc" = (/obj/structure/shuttle/engine/heater{tag = "icon-heater (EAST)"; icon_state = "heater"; dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/shuttle/arrival)
+"bd" = (/obj/structure/shuttle/engine/propulsion{tag = "icon-propulsion (WEST)"; icon_state = "propulsion"; dir = 8},/turf/simulated/floor/plating,/area/shuttle/arrival)
+"be" = (/obj/effect/landmark{name = "Observer-Start"},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bf" = (/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bg" = (/turf/simulated/wall/shuttle{tag = "icon-swall_s5"; icon_state = "swall_s5"; dir = 2},/area/shuttle/arrival)
+"bh" = (/obj/structure/closet/emcloset,/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bi" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bj" = (/obj/structure/sign/map/left{desc = "A framed picture of the station. Clockwise from security at the top (red), you see engineering (yellow), science (purple), escape (red and white), medbay (green), arrivals (blue and white), and finally cargo (brown)."; icon_state = "map-left-MS"; pixel_y = -32},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bk" = (/obj/structure/sign/map/right{desc = "A framed picture of the station. Clockwise from security at the top (red), you see engineering (yellow), science (purple), escape (red and white), medbay (green), arrivals (blue and white), and finally cargo (brown)."; icon_state = "map-right-MS"; pixel_y = -32},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bl" = (/obj/machinery/requests_console{department = "Arrival shuttle"; pixel_y = -30},/turf/simulated/floor/plasteel/shuttle,/area/shuttle/arrival)
+"bm" = (/obj/structure/shuttle/engine/propulsion{tag = "icon-burst_l (WEST)"; icon_state = "burst_l"; dir = 8},/turf/simulated/floor/plating,/area/shuttle/arrival)
+"bn" = (/obj/machinery/door/airlock/shuttle{name = "Arrivals Shuttle Airlock"},/obj/docking_port/mobile{dwidth = 5; height = 7; id = "arrival"; name = "arrival shuttle"; travelDir = -90; width = 15},/obj/docking_port/stationary{dwidth = 5; height = 7; id = "arrival_home"; name = "port bay 1"; width = 15},/turf/simulated/floor/plating,/area/shuttle/arrival)
+"bo" = (/turf/simulated/wall/shuttle{tag = "icon-swall13"; icon_state = "swall13"; dir = 2},/area/shuttle/arrival)
+"bp" = (/turf/simulated/wall/shuttle{tag = "icon-swall_s9"; icon_state = "swall_s9"; dir = 2},/area/shuttle/arrival)
+"bq" = (/obj/structure/grille,/obj/structure/window/reinforced/fulltile,/turf/simulated/floor/plating,/area/hallway/primary/aft)
+"br" = (/obj/machinery/door/airlock/external{name = "Arrival Airlock"},/turf/simulated/floor/plating,/area/hallway/primary/aft)
+"bs" = (/turf/space,/area/hallway/primary/aft)
+"bt" = (/turf/simulated/wall,/area/hallway/primary/aft)
+"bu" = (/turf/simulated/floor/plasteel,/area/hallway/primary/aft)
+"bv" = (/obj/machinery/power/apc,/turf/simulated/floor/plasteel,/area/hallway/primary/aft)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacadadadadababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacacacacacacacacaeaeaeafagagafababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeadadadahababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeaiagagajababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeadadadadakabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeadaaalaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeadalalaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeadaaalaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeadadadadababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeajagagajababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeadadadahababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeamagagamababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeacadadadadababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeacaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeacaaaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeacaaaaaaaaaaaaaaaaaaaaaaananananananaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacacacacaeaeaeaeaeaeacacacacacacacacacacacacananaoapapananaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaqaeaeanarasarararanaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeaeaeaeaeatauavavawaraxayazaranaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeanarararasaranaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalaaadaAadadadadadadaAadaBacacacacacacacacananapapaCananaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaDaDaDaEaFaGaFaHaFaFaHaFaGaIaJaKaKaaaaaaaaaaaaaaanananananaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaEaFaFaLaMaNaOaPaQaRaSaTaNaUaVaWaKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaXaYaYaZaNbabbbabbbabbbaaNbcbdaWaKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaHaNaNaGaNbabbbabebabbbaaNbcbdaWaKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaXbfbfaZaNbabbbabbbabbbaaNbcbdaWaKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabgaFaFaLbhaNbiaNbjbkaNblaNaUbmaWaKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaDaDaDbgaFbnaFaHaFaFaHaFaGbobpaKaKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalaabqbrbqbqbqbqbqbqbrbqbsbtbtbtbtbtbtbtbtbtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaabtbububububububububububububububububvbubtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaabtbububububububububububububububububububtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaabtbububububububububububububububububububtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaabtbtbtbtbtbtbtbtbtbtbtbtbtbtbtbtbtbtbtbtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

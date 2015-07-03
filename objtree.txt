@@ -153,6 +153,7 @@
 /add_tspace(t, u)
 /add_zero(t, u)
 /add_zero2(t, u)
+/addtimer(var/thingToCall, var/procToCall, var/wait, var/argList = list())
 /admin_forcemove(var/mob/mover, var/atom/newloc)
 /admin_keyword_to_flag(word, previous_rights=0)
 /admin_keyword_to_path(word)
@@ -737,6 +738,7 @@
 /atom/movable/get_alt_name()
 /atom/movable/get_light_range(radius)
 /atom/movable/get_spans()
+/atom/movable/get_ui_data(mob/user)
 /atom/movable/hit_check()
 /atom/movable/initialize()
 /atom/movable/lang_treat(atom/movable/speaker, message_langs, raw_message, list/spans)
@@ -752,7 +754,7 @@
 /atom/movable/overlay/attackby(a, b, c)
 /atom/movable/pipe_eject(var/direction)
 /atom/movable/proc/atmos_spawn_air(var/text, var/amount)
-/atom/movable/proc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/atom/movable/proc/get_ui_data(mob/user)
 /atom/movable/say(message)
 /atom/movable/say_quote(input, list/spans)
 /atom/movable/send_speech(message, range = 7, obj/source = src, bubble_type, list/spans)
@@ -900,6 +902,7 @@
 /client/cmd_admin_slimeize(var/mob/M in mob_list)
 /client/cmd_admin_subtle_message(mob/M as mob in mob_list)
 /client/cmd_admin_world_narrate()
+/client/cmd_ahelp_reply(whom)
 /client/cmd_assume_direct_control(var/mob/M in mob_list)
 /client/cmd_debug_del_all(var/object as text)
 /client/cmd_debug_make_powernets()
@@ -937,6 +940,7 @@
 /client/getserverlog()
 /client/give_disease(mob/T as mob in mob_list)
 /client/give_spell(mob/T as mob in mob_list)
+/client/giveadminhelpverb()
 /client/giveruntimelog()
 /client/handle_spam_prevention(var/message, var/mute_type)
 /client/hide_most_verbs()
@@ -1581,6 +1585,8 @@
 /datum/chemical_reaction/silencer
 /datum/chemical_reaction/silver_sulfadiazine
 /datum/chemical_reaction/singulo
+/datum/chemical_reaction/slimeRNG
+/datum/chemical_reaction/slimeRNG/on_reaction(var/datum/reagents/holder)
 /datum/chemical_reaction/slimebloodlust
 /datum/chemical_reaction/slimebloodlust/on_reaction(var/datum/reagents/holder)
 /datum/chemical_reaction/slimebork
@@ -1601,10 +1607,12 @@
 /datum/chemical_reaction/slimecrystal/on_reaction(var/datum/reagents/holder, var/created_volume)
 /datum/chemical_reaction/slimeexplosion
 /datum/chemical_reaction/slimeexplosion/on_reaction(var/datum/reagents/holder)
-/datum/chemical_reaction/slimefilm
-/datum/chemical_reaction/slimefilm/on_reaction(var/datum/reagents/holder)
 /datum/chemical_reaction/slimefire
 /datum/chemical_reaction/slimefire/on_reaction(var/datum/reagents/holder)
+/datum/chemical_reaction/slimefloor
+/datum/chemical_reaction/slimefloor/on_reaction(var/datum/reagents/holder)
+/datum/chemical_reaction/slimefloor2
+/datum/chemical_reaction/slimefloor2/on_reaction(var/datum/reagents/holder, var/created_volume)
 /datum/chemical_reaction/slimefreeze
 /datum/chemical_reaction/slimefreeze/on_reaction(var/datum/reagents/holder)
 /datum/chemical_reaction/slimefrost
@@ -1921,6 +1929,9 @@
 /datum/design/cyberimp_antidrop
 /datum/design/cyberimp_antistun
 /datum/design/cyberimp_medical_hud
+/datum/design/cyberimp_nutriment
+/datum/design/cyberimp_nutriment_plus
+/datum/design/cyberimp_reviver
 /datum/design/cyberimp_security_hud
 /datum/design/cyberimp_thermals
 /datum/design/cyberimp_xray
@@ -2317,18 +2328,9 @@
 /datum/dna/remove_mutation(mutation_name)
 /datum/dna/remove_mutation_group(list/group)
 /datum/dna/transfer_identity(mob/living/carbon/destination)
-/datum/effect/effect/fadeOut(var/atom/A, var/frames = 16)
 /datum/effect/effect/system
 /datum/effect/effect/system/Destroy()
 /datum/effect/effect/system/attach(atom/atom)
-/datum/effect/effect/system/bad_smoke_spread
-/datum/effect/effect/system/bad_smoke_spread/set_up(n = 5, c = 0, loca, direct)
-/datum/effect/effect/system/bad_smoke_spread/start()
-/datum/effect/effect/system/chem_smoke_spread
-/datum/effect/effect/system/chem_smoke_spread/Destroy()
-/datum/effect/effect/system/chem_smoke_spread/New()
-/datum/effect/effect/system/chem_smoke_spread/set_up(var/datum/reagents/carry = null, n = 5, c = 0, loca, direct, silent = 0)
-/datum/effect/effect/system/chem_smoke_spread/start()
 /datum/effect/effect/system/foam_spread
 /datum/effect/effect/system/foam_spread/Destroy()
 /datum/effect/effect/system/foam_spread/New()
@@ -2336,12 +2338,6 @@
 /datum/effect/effect/system/foam_spread/metal/set_up(amt=5, loca, var/datum/reagents/carry = null, var/metaltype)
 /datum/effect/effect/system/foam_spread/set_up(amt=5, loca, var/datum/reagents/carry = null)
 /datum/effect/effect/system/foam_spread/start()
-/datum/effect/effect/system/freezing_smoke_spread
-/datum/effect/effect/system/freezing_smoke_spread/set_up(n = 6, c = 0, loca)
-/datum/effect/effect/system/freezing_smoke_spread/start()
-/datum/effect/effect/system/harmless_smoke_spread
-/datum/effect/effect/system/harmless_smoke_spread/set_up(n = 5, c = 0, loca, direct)
-/datum/effect/effect/system/harmless_smoke_spread/start()
 /datum/effect/effect/system/ion_trail_follow
 /datum/effect/effect/system/ion_trail_follow/Destroy()
 /datum/effect/effect/system/ion_trail_follow/set_up(atom/atom)
@@ -2354,9 +2350,20 @@
 /datum/effect/effect/system/reagents_explosion/if(istype(loc, /turf/))
 /datum/effect/effect/system/reagents_explosion/start()
 /datum/effect/effect/system/set_up(n = 3, c = 0, turf/loc)
-/datum/effect/effect/system/sleep_smoke_spread
-/datum/effect/effect/system/sleep_smoke_spread/set_up(n = 5, c = 0, loca, direct)
-/datum/effect/effect/system/sleep_smoke_spread/start()
+/datum/effect/effect/system/smoke_spread
+/datum/effect/effect/system/smoke_spread/bad
+/datum/effect/effect/system/smoke_spread/chem
+/datum/effect/effect/system/smoke_spread/chem/Destroy()
+/datum/effect/effect/system/smoke_spread/chem/New()
+/datum/effect/effect/system/smoke_spread/chem/set_up(var/datum/reagents/carry = null, n = 5, c = 0, loca, direct, silent = 0)
+/datum/effect/effect/system/smoke_spread/chem/start()
+/datum/effect/effect/system/smoke_spread/freezing
+/datum/effect/effect/system/smoke_spread/freezing/Chilled(atom/A)
+/datum/effect/effect/system/smoke_spread/freezing/set_up(n = 5, c = 0, loca, direct, blasting = 0)
+/datum/effect/effect/system/smoke_spread/freezing/start()
+/datum/effect/effect/system/smoke_spread/set_up(n = 5, c = 0, loca, direct)
+/datum/effect/effect/system/smoke_spread/sleeping
+/datum/effect/effect/system/smoke_spread/start()
 /datum/effect/effect/system/spark_spread
 /datum/effect/effect/system/spark_spread/set_up(n = 3, c = 0, loca)
 /datum/effect/effect/system/spark_spread/start()
@@ -2456,6 +2463,7 @@
 /datum/game_mode/announce()
 /datum/game_mode/are_operatives_dead()
 /datum/game_mode/assign_exchange_role(var/datum/mind/owner)
+/datum/game_mode/assign_gang_fighting_style()
 /datum/game_mode/auto_declare_completion_abduction()
 /datum/game_mode/auto_declare_completion_blob()
 /datum/game_mode/auto_declare_completion_changeling()
@@ -2802,6 +2810,40 @@
 /datum/holiday/writer
 /datum/holiday/xmas
 /datum/holiday/xmas/greet()
+/datum/html_interface
+/datum/html_interface/Destroy()
+/datum/html_interface/New(atom/ref, title, width = 700, height = 480, head = "")
+/datum/html_interface/Topic(href, href_list[])
+/datum/html_interface/_getClient(datum/html_interface_client/hclient)
+/datum/html_interface/_renderContent(id, datum/html_interface_client/hclient, ignore_cache = FALSE)
+/datum/html_interface/_renderLayout(datum/html_interface_client/hclient)
+/datum/html_interface/_renderTitle(datum/html_interface_client/hclient, ignore_cache = FALSE)
+/datum/html_interface/cards/New()
+/datum/html_interface/cards/sendResources(client/client)
+/datum/html_interface/createWindow(datum/html_interface_client/hclient)
+/datum/html_interface/disableFor(datum/html_interface_client/hclient)
+/datum/html_interface/enableFor(datum/html_interface_client/hclient)
+/datum/html_interface/executeJavaScript(jscript, datum/html_interface_client/hclient = null)
+/datum/html_interface/getClient(client, create_if_not_exist = FALSE)
+/datum/html_interface/hide(datum/html_interface_client/hclient)
+/datum/html_interface/isUsed()
+/datum/html_interface/nanotrasen/New()
+/datum/html_interface/nanotrasen/createWindow(datum/html_interface_client/hclient)
+/datum/html_interface/nanotrasen/disableFor(datum/html_interface_client/hclient)
+/datum/html_interface/nanotrasen/enableFor(datum/html_interface_client/hclient)
+/datum/html_interface/nanotrasen/sendResources(client/client)
+/datum/html_interface/nanotrasen/setEyeColor(color, datum/html_interface_client/hclient)
+/datum/html_interface/sendResources(client/client)
+/datum/html_interface/setTitle(title, ignore_cache = FALSE)
+/datum/html_interface/show(datum/html_interface_client/hclient)
+/datum/html_interface/specificRenderTitle(datum/html_interface_client/hclient, ignore_cache = FALSE)
+/datum/html_interface/updateContent(id, content, ignore_cache = FALSE)
+/datum/html_interface/updateLayout(layout)
+/datum/html_interface_client
+/datum/html_interface_client/New(client/client)
+/datum/html_interface_client/getExtraVar(key)
+/datum/html_interface_client/putExtraVar(key, value)
+/datum/html_interface_client/removeExtraVar(key)
 /datum/hud
 /datum/hud/ButtonNumberToScreenCoords(var/number)
 /datum/hud/New(mob/owner)
@@ -2973,6 +3015,16 @@
 /datum/martial_art/plasma_fist/harm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 /datum/martial_art/remove(var/mob/living/carbon/human/H)
 /datum/martial_art/teach(var/mob/living/carbon/human/H,var/make_temporary=0)
+/datum/martial_art/the_sleeping_carp
+/datum/martial_art/the_sleeping_carp/backKick(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/check_streak(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/disarm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/elbowDrop(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/grab_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/harm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/headKick(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/kneeStomach(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
+/datum/martial_art/the_sleeping_carp/wristWrench(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 /datum/martial_art/wrestling
 /datum/martial_art/wrestling/Suplex(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
 /datum/martial_art/wrestling/disarm_act(var/mob/living/carbon/human/A, var/mob/living/carbon/human/D)
@@ -3014,6 +3066,21 @@
 /datum/mind/transfer_mindbound_actions(var/mob/living/new_character)
 /datum/mind/transfer_to(mob/living/new_character)
 /datum/mind/wipe_memory()
+/datum/mineral_container
+/datum/mineral_container/New(obj/O, type, max_amt = 0, amt = 0)
+/datum/mineral_container/accepts(obj/O)
+/datum/mineral_container/amount2sheet(amt)
+/datum/mineral_container/insert(sheet_amt)
+/datum/mineral_container/insert_amount(amt)
+/datum/mineral_container/insert_sheet(obj/S)
+/datum/mineral_container/isEmpty(amt = 0)
+/datum/mineral_container/isFull(amt = 0)
+/datum/mineral_container/retrieve(sheet_amt)
+/datum/mineral_container/retrieve_all()
+/datum/mineral_container/retrieve_amount(amt)
+/datum/mineral_container/sheet2amount(sheet_amt)
+/datum/mineral_container/use_amount(amt)
+/datum/mineral_container/use_sheets(sheet_amt)
 /datum/module
 /datum/module/New(var/obj/O)
 /datum/module_picker
@@ -3239,6 +3306,8 @@
 /datum/objective/steal/special
 /datum/objective/steal/special/New()
 /datum/objective/steal/special/find_target()
+/datum/objective/summon_guns
+/datum/objective/summon_guns/check_completion()
 /datum/objective/survive
 /datum/objective/survive/check_completion()
 /datum/objective/update_explanation_text()
@@ -3302,6 +3371,7 @@
 /datum/pipeline/reconcile_air()
 /datum/pipeline/temperature_interact(turf/target, share_volume, thermal_conductivity)
 /datum/pipeline/temporarily_store_air()
+/datum/playingcard
 /datum/polloption
 /datum/powernet
 /datum/powernet/Destroy()
@@ -3358,31 +3428,29 @@
 /datum/reagent/blackpowder/on_ex_act()
 /datum/reagent/blob
 /datum/reagent/blob/b_sorium
-/datum/reagent/blob/b_sorium/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/b_sorium/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/boiling_oil
-/datum/reagent/blob/boiling_oil/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/boiling_oil/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/dark_matter
-/datum/reagent/blob/dark_matter/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/dark_matter/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/explosive
-/datum/reagent/blob/explosive/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/explosive/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/lung_destroying_toxin
-/datum/reagent/blob/lung_destroying_toxin/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume,var/show_message = 1)
-/datum/reagent/blob/morphine
-/datum/reagent/blob/morphine/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/lung_destroying_toxin/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/omnizine
-/datum/reagent/blob/omnizine/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/omnizine/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/radioactive_liquid
-/datum/reagent/blob/radioactive_liquid/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume,var/show_message = 1)
+/datum/reagent/blob/radioactive_liquid/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/reagent_vortex(var/mob/living/M as mob, var/setting_type)
 /datum/reagent/blob/send_message(var/mob/living/M as mob)
 /datum/reagent/blob/skin_melter
-/datum/reagent/blob/skin_melter/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/skin_melter/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/skin_ripper
-/datum/reagent/blob/skin_ripper/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/skin_ripper/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/spacedrugs
-/datum/reagent/blob/spacedrugs/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/spacedrugs/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blob/toxic_goop
-/datum/reagent/blob/toxic_goop/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/blob/toxic_goop/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
 /datum/reagent/blood
 /datum/reagent/blood/on_merge(var/list/data)
 /datum/reagent/blood/on_new(var/list/data)
@@ -3832,7 +3900,7 @@
 /datum/reagent/radium
 /datum/reagent/radium/on_mob_life(var/mob/living/M as mob)
 /datum/reagent/radium/reaction_turf(var/turf/T, var/volume)
-/datum/reagent/reaction_mob(var/mob/M, var/method=TOUCH, var/volume, var/show_message = 1)
+/datum/reagent/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume, var/show_message = 1, var/touch_protection = 0)
 /datum/reagent/reaction_obj(var/obj/O, var/volume)
 /datum/reagent/reaction_turf(var/turf/T, var/volume)
 /datum/reagent/saltpetre
@@ -3958,7 +4026,7 @@
 /datum/reagents
 /datum/reagents/Destroy()
 /datum/reagents/New(maximum=100)
-/datum/reagents/add_reagent(var/reagent, var/amount, var/list/data=null, var/reagtemp = 300)
+/datum/reagents/add_reagent(var/reagent, var/amount, var/list/data=null, var/reagtemp = 300, var/no_react = 0)
 /datum/reagents/add_reagent_list(var/list/list_reagents, var/list/data=null)
 /datum/reagents/check_gofast(var/mob/M)
 /datum/reagents/check_goreallyfast(var/mob/M)
@@ -4837,6 +4905,7 @@
 /datum/subsystem/nano/close_user_uis(var/mob/user, src_object = null, ui_key = null)
 /datum/subsystem/nano/fire()
 /datum/subsystem/nano/get_open_ui(var/mob/user, src_object, ui_key)
+/datum/subsystem/nano/push_open_or_new_ui(var/mob/user, var/atom/movable/src_object, ui_key, var/datum/nanoui/ui, template, title, width, height, auto_update)
 /datum/subsystem/nano/send_resources(client)
 /datum/subsystem/nano/stat_entry()
 /datum/subsystem/nano/try_update_ui(var/mob/user, src_object, ui_key, var/datum/nanoui/ui, data)
@@ -4901,6 +4970,10 @@
 /datum/subsystem/ticker/setupFactions()
 /datum/subsystem/ticker/setupGenetics()
 /datum/subsystem/ticker/station_explosion_cinematic(var/station_missed=0, var/override = null)
+/datum/subsystem/timer
+/datum/subsystem/timer/New()
+/datum/subsystem/timer/fire()
+/datum/subsystem/timer/stat_entry(msg)
 /datum/subsystem/vote
 /datum/subsystem/vote/New()
 /datum/subsystem/vote/Topic(href,href_list[],hsrc)
@@ -5442,6 +5515,9 @@
 /datum/teleport/start(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null)
 /datum/teleport/teleport()
 /datum/teleport/teleportChecks()
+/datum/timedevent
+/datum/timedevent/Destroy()
+/datum/timedevent/New()
 /datum/tlv
 /datum/tlv/CopyFrom(datum/tlv/other)
 /datum/tlv/New(_min2 as num, _min1 as num, _max1 as num, _max2 as num)
@@ -5487,6 +5563,14 @@
 /datum/uplink_item/badass/syndiecash
 /datum/uplink_item/badass/syndiecigs
 /datum/uplink_item/buy(var/obj/item/device/uplink/U, var/mob/user)
+/datum/uplink_item/cyber_implants
+/datum/uplink_item/cyber_implants/antidrop
+/datum/uplink_item/cyber_implants/antistun
+/datum/uplink_item/cyber_implants/bundle
+/datum/uplink_item/cyber_implants/nutriment
+/datum/uplink_item/cyber_implants/reviver
+/datum/uplink_item/cyber_implants/thermals
+/datum/uplink_item/cyber_implants/xray
 /datum/uplink_item/dangerous
 /datum/uplink_item/dangerous/bioterror
 /datum/uplink_item/dangerous/carbine
@@ -5530,8 +5614,9 @@
 /datum/uplink_item/device_tools/toolbox
 /datum/uplink_item/implants
 /datum/uplink_item/implants/adrenal
-/datum/uplink_item/implants/explosive
 /datum/uplink_item/implants/freedom
+/datum/uplink_item/implants/macrobomb
+/datum/uplink_item/implants/microbomb
 /datum/uplink_item/implants/uplink
 /datum/uplink_item/spawn_item(var/turf/loc, var/obj/item/device/uplink/U)
 /datum/uplink_item/stealthy_tools
@@ -5666,6 +5751,7 @@
 /dd_limittext(message, length)
 /dd_range(var/low, var/high, var/num)
 /deconstruct_block(value, values, blocksize=3)
+/deltimer(var/id)
 /derpspeech(message, stuttering)
 /difflist(var/list/first, var/list/second, var/skiprep=0)
 /dir2angle(var/D)
@@ -5693,7 +5779,7 @@
 /dmm_suite/verb/write_map(var/turf/t1 as turf, var/turf/t2 as turf, var/flags as num)
 /dmm_suite/write_map(var/turf/t1 as turf, var/turf/t2 as turf, var/flags as num)
 /do_after(mob/user, delay, numticks = 5, needhand = 1, atom/target = null)
-/do_mob(var/mob/user , var/mob/target, var/time = 30, numticks = 5)
+/do_mob(var/mob/user , var/mob/target, var/time = 30, numticks = 5, var/stealth = 0)
 /do_teleport(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null)
 /domutcheck(mob/living/carbon/M)
 /electrocute_mob(mob/living/carbon/M as mob, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
@@ -5956,6 +6042,7 @@
 /json_writer/write_string(txt)
 /key_name(var/whom, var/include_link = null, var/include_name = 1)
 /key_name_admin(var/whom, var/include_name = 1)
+/keywords_lookup(var/msg)
 /kick_clients_in_lobby(var/message, var/kick_only_afk = 0)
 /list2json(list/L)
 /list2text(list/ls, sep)
@@ -5986,6 +6073,7 @@
 /make_datum_references_lists()
 /make_maint_all_access()
 /make_mining_asteroid_secret()
+/make_progress_bar(var/current_number, var/goal_number, var/atom/target)
 /matrix
 /matrix/Add(m) return matrix(src,m,2|128)
 /matrix/Interpolate(m2,t)
@@ -6288,6 +6376,7 @@
 /mob/living/carbon/alien/attack_paw(mob/living/carbon/monkey/M as mob)
 /mob/living/carbon/alien/attack_slime(mob/living/simple_animal/slime/M as mob)
 /mob/living/carbon/alien/canBeHandcuffed()
+/mob/living/carbon/alien/carbon/alien/humanoid/get_permeability_protection()
 /mob/living/carbon/alien/check_breath(datum/gas_mixture/breath)
 /mob/living/carbon/alien/check_eye_prot()
 /mob/living/carbon/alien/dust(var/animation = 1)
@@ -6423,7 +6512,7 @@
 /mob/living/carbon/breathe()
 /mob/living/carbon/canBeHandcuffed()
 /mob/living/carbon/canSuicide()
-/mob/living/carbon/can_speak_basic(message)
+/mob/living/carbon/can_speak_vocal(message)
 /mob/living/carbon/can_use_hands()
 /mob/living/carbon/check_breath(datum/gas_mixture/breath)
 /mob/living/carbon/check_ear_prot()
@@ -6563,6 +6652,7 @@
 /mob/living/carbon/human/get_item_by_slot(slot_id)
 /mob/living/carbon/human/get_organ(var/zone)
 /mob/living/carbon/human/get_overlays_copy(var/list/unwantedLayers)
+/mob/living/carbon/human/get_permeability_protection()
 /mob/living/carbon/human/get_spans()
 /mob/living/carbon/human/get_visible_name()
 /mob/living/carbon/human/getarmor(var/def_zone, var/type)
@@ -6645,8 +6735,10 @@
 /mob/living/carbon/human/shadowling_ascendance()
 /mob/living/carbon/human/shadowling_hatch()
 /mob/living/carbon/human/show_inv(mob/user)
+/mob/living/carbon/human/shred_clothing(var/bomb,var/shock)
 /mob/living/carbon/human/singularity_act()
 /mob/living/carbon/human/singularity_pull(S, current_size)
+/mob/living/carbon/human/sleeping_carp_help()
 /mob/living/carbon/human/slimeize(reproduce as num)
 /mob/living/carbon/human/slip(var/s_amount, var/w_amount, var/obj/O, var/lube)
 /mob/living/carbon/human/spawn_dust()
@@ -6725,6 +6817,7 @@
 /mob/living/carbon/monkey/equip_to_slot(obj/item/I, slot, redraw_mob = 1)
 /mob/living/carbon/monkey/ex_act(severity, target)
 /mob/living/carbon/monkey/examine(mob/user)
+/mob/living/carbon/monkey/get_permeability_protection()
 /mob/living/carbon/monkey/gib_animation(var/animate)
 /mob/living/carbon/monkey/handle_breath_temperature(datum/gas_mixture/breath)
 /mob/living/carbon/monkey/handle_changeling()
@@ -6812,6 +6905,7 @@
 /mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
 /mob/living/get_message_mode(message)
 /mob/living/get_organ_target()
+/mob/living/get_permeability_protection()
 /mob/living/get_standard_pixel_x_offset(lying = 0)
 /mob/living/get_standard_pixel_y_offset(lying = 0)
 /mob/living/get_temperature(var/datum/gas_mixture/environment)
@@ -6858,7 +6952,7 @@
 /mob/living/resist_restraints()
 /mob/living/revive()
 /mob/living/robot_talk(var/message)
-/mob/living/run_armor_check(def_zone = null, attack_flag = "melee", absorb_text = null, soften_text = null)
+/mob/living/run_armor_check(def_zone = null, attack_flag = "melee", absorb_text = null, soften_text = null, var/armour_penetration, var/penetrated_text)
 /mob/living/say(message, bubble_type,)
 /mob/living/say_quote(input, list/spans)
 /mob/living/say_test(var/text)
@@ -8176,6 +8270,7 @@
 /obj/attack_hand(mob/living/user)
 /obj/attack_tk(mob/user)
 /obj/buckle_mob(mob/living/M)
+/obj/burn()
 /obj/check_access(obj/item/I)
 /obj/check_access_list(var/list/L)
 /obj/container_resist()
@@ -8425,6 +8520,8 @@
 /obj/effect/decal/cleanable/robot_debris/old
 /obj/effect/decal/cleanable/robot_debris/streak(var/list/directions)
 /obj/effect/decal/cleanable/robot_debris/up
+/obj/effect/decal/cleanable/shreds
+/obj/effect/decal/cleanable/shreds/New()
 /obj/effect/decal/cleanable/tomato_smudge
 /obj/effect/decal/cleanable/trail_holder
 /obj/effect/decal/cleanable/trail_holder/CtrlClick(var/mob/user)
@@ -8470,39 +8567,39 @@
 /obj/effect/dummy/spell_jaunt/relaymove(var/mob/user, direction)
 /obj/effect/effect
 /obj/effect/effect/Destroy()
-/obj/effect/effect/bad_smoke
-/obj/effect/effect/bad_smoke/CanPass(atom/movable/mover, turf/target, height=0)
-/obj/effect/effect/bad_smoke/Crossed(mob/living/carbon/M as mob )
-/obj/effect/effect/bad_smoke/Move()
-/obj/effect/effect/bad_smoke/New()
-/obj/effect/effect/chem_smoke
-/obj/effect/effect/chem_smoke/Crossed(mob/living/carbon/M as mob )
-/obj/effect/effect/chem_smoke/Move()
-/obj/effect/effect/chem_smoke/New()
 /obj/effect/effect/foam
 /obj/effect/effect/foam/Crossed(var/atom/movable/AM)
 /obj/effect/effect/foam/Destroy()
 /obj/effect/effect/foam/New(loc)
+/obj/effect/effect/foam/foam_mob(var/mob/living/L as mob)
 /obj/effect/effect/foam/kill_foam()
 /obj/effect/effect/foam/metal/Crossed(var/atom/movable/AM)
-/obj/effect/effect/foam/metal/New(loc)
 /obj/effect/effect/foam/metal/aluminium
 /obj/effect/effect/foam/metal/iron
 /obj/effect/effect/foam/metal/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 /obj/effect/effect/foam/process()
 /obj/effect/effect/foam/spread_foam()
 /obj/effect/effect/foam/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-/obj/effect/effect/freezing_smoke
-/obj/effect/effect/freezing_smoke/Chilled(atom/A)
-/obj/effect/effect/freezing_smoke/New(loc, var/amt, var/blast)
-/obj/effect/effect/harmless_smoke
-/obj/effect/effect/harmless_smoke/New()
 /obj/effect/effect/ion_trails
-/obj/effect/effect/sleep_smoke
-/obj/effect/effect/sleep_smoke/Crossed(mob/living/carbon/M as mob )
-/obj/effect/effect/sleep_smoke/Move()
-/obj/effect/effect/sleep_smoke/New()
 /obj/effect/effect/smoke
+/obj/effect/effect/smoke/Crossed(mob/living/M as mob)
+/obj/effect/effect/smoke/Destroy()
+/obj/effect/effect/smoke/New()
+/obj/effect/effect/smoke/bad
+/obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0)
+/obj/effect/effect/smoke/bad/process()
+/obj/effect/effect/smoke/bad/smoke_mob(mob/living/carbon/M as mob)
+/obj/effect/effect/smoke/chem
+/obj/effect/effect/smoke/chem/process()
+/obj/effect/effect/smoke/chem/smoke_mob(mob/living/carbon/M as mob)
+/obj/effect/effect/smoke/fade_out(var/frames = 16)
+/obj/effect/effect/smoke/freezing
+/obj/effect/effect/smoke/kill_smoke()
+/obj/effect/effect/smoke/process()
+/obj/effect/effect/smoke/sleeping
+/obj/effect/effect/smoke/sleeping/process()
+/obj/effect/effect/smoke/sleeping/smoke_mob(mob/living/carbon/M as mob)
+/obj/effect/effect/smoke/smoke_mob(mob/living/carbon/M as mob)
 /obj/effect/effect/sparks
 /obj/effect/effect/sparks/Destroy()
 /obj/effect/effect/sparks/Move()
@@ -8621,6 +8718,7 @@
 /obj/effect/immovablerod/Bump(atom/clong)
 /obj/effect/immovablerod/Move()
 /obj/effect/immovablerod/New(atom/start, atom/end)
+/obj/effect/immovablerod/ex_act(test)
 /obj/effect/landmark
 /obj/effect/landmark/Destroy()
 /obj/effect/landmark/New()
@@ -8757,6 +8855,8 @@
 /obj/effect/mist
 /obj/effect/nanofrost_container
 /obj/effect/nanofrost_container/Smoke()
+/obj/effect/nettingportal
+/obj/effect/nettingportal/New()
 /obj/effect/overlay
 /obj/effect/overlay/beam
 /obj/effect/overlay/beam/New()
@@ -9130,6 +9230,7 @@
 /obj/effect/spawner/lootdrop
 /obj/effect/spawner/lootdrop/New()
 /obj/effect/spawner/lootdrop/armory_contraband
+/obj/effect/spawner/lootdrop/crate_spawner
 /obj/effect/spawner/lootdrop/maintenance
 /obj/effect/spawner/lootdrop/maintenance/New()
 /obj/effect/spawner/newbomb
@@ -9188,6 +9289,8 @@
 /obj/effect/vaultspawner
 /obj/effect/vaultspawner/New(turf/location as turf,lX = minX,uX = maxX,lY = minY,uY = maxY,var/type = null)
 /obj/ex_act(severity, target)
+/obj/extinguish()
+/obj/fire_act(var/global_overlay=1)
 /obj/get_spans()
 /obj/handle_internal_lifeform(mob/lifeform_inside_me, breath_request)
 /obj/hide(h)
@@ -9200,7 +9303,7 @@
 /obj/item/GetJobName()
 /obj/item/IsReflect(var/def_zone)
 /obj/item/IsShield()
-/obj/item/acid_act(var/acidpwr, var/toxpwr, var/acid_volume)
+/obj/item/acid_act(var/acidpwr, var/acid_volume)
 /obj/item/active_uplink_check(mob/user as mob)
 /obj/item/add_blood(mob/living/carbon/M)
 /obj/item/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
@@ -9319,10 +9422,12 @@
 /obj/item/ammo_casing/energy/lasergun
 /obj/item/ammo_casing/energy/meteor
 /obj/item/ammo_casing/energy/mindflayer
+/obj/item/ammo_casing/energy/net
 /obj/item/ammo_casing/energy/plasma
 /obj/item/ammo_casing/energy/plasma/adv
 /obj/item/ammo_casing/energy/temp
 /obj/item/ammo_casing/energy/temp/hot
+/obj/item/ammo_casing/energy/trap
 /obj/item/ammo_casing/energy/wormhole
 /obj/item/ammo_casing/energy/wormhole/New(var/obj/item/weapon/gun/energy/wormhole_projector/wh)
 /obj/item/ammo_casing/energy/wormhole/orange
@@ -9467,6 +9572,7 @@
 /obj/item/candle/attack_self(mob/user as mob)
 /obj/item/candle/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 /obj/item/candle/dropped(mob/user)
+/obj/item/candle/fire_act()
 /obj/item/candle/light(var/flavor_text = "<span class='danger'>[usr] lights the [name].</span>")
 /obj/item/candle/pickup(mob/user)
 /obj/item/candle/process()
@@ -9929,6 +10035,7 @@
 /obj/item/clothing/shoes
 /obj/item/clothing/shoes/clown_shoes
 /obj/item/clothing/shoes/clown_shoes/banana_shoes
+/obj/item/clothing/shoes/clown_shoes/banana_shoes/New()
 /obj/item/clothing/shoes/clown_shoes/banana_shoes/attack_self(mob/user)
 /obj/item/clothing/shoes/clown_shoes/banana_shoes/attackby(obj/item/O, mob/user, params)
 /obj/item/clothing/shoes/clown_shoes/banana_shoes/examine(mob/user)
@@ -10076,9 +10183,12 @@
 /obj/item/clothing/suit/jacket
 /obj/item/clothing/suit/jacket/leather
 /obj/item/clothing/suit/jacket/leather/overcoat
+/obj/item/clothing/suit/jacket/puffer
+/obj/item/clothing/suit/jacket/puffer/vest
 /obj/item/clothing/suit/judgerobe
 /obj/item/clothing/suit/justice
 /obj/item/clothing/suit/magusred
+/obj/item/clothing/suit/miljacket
 /obj/item/clothing/suit/monkeysuit
 /obj/item/clothing/suit/nerdshirt
 /obj/item/clothing/suit/nun
@@ -10136,7 +10246,6 @@
 /obj/item/clothing/suit/space/hardsuit/security/hos
 /obj/item/clothing/suit/space/hardsuit/syndi
 /obj/item/clothing/suit/space/hardsuit/syndi/New()
-/obj/item/clothing/suit/space/hardsuit/syndi/ToggleHelmet()
 /obj/item/clothing/suit/space/hardsuit/syndi/owl
 /obj/item/clothing/suit/space/hardsuit/ui_action_click()
 /obj/item/clothing/suit/space/hardsuit/verb/Jetpack()
@@ -10463,6 +10572,10 @@
 /obj/item/cybernetic_implant/chest/nutriment/function()
 /obj/item/cybernetic_implant/chest/nutriment/plus
 /obj/item/cybernetic_implant/chest/nutriment/process()
+/obj/item/cybernetic_implant/chest/reviver
+/obj/item/cybernetic_implant/chest/reviver/emp_act(severity)
+/obj/item/cybernetic_implant/chest/reviver/function()
+/obj/item/cybernetic_implant/chest/reviver/process()
 /obj/item/cybernetic_implant/eyes
 /obj/item/cybernetic_implant/eyes/New()
 /obj/item/cybernetic_implant/eyes/emp_act(severity)
@@ -10968,6 +11081,7 @@
 /obj/item/device/pizza_bomb/New()
 /obj/item/device/pizza_bomb/attack_self(mob/user)
 /obj/item/device/pizza_bomb/attackby(var/obj/item/I, var/mob/user, params)
+/obj/item/device/pizza_bomb/burn()
 /obj/item/device/pizza_bomb/go_boom()
 /obj/item/device/pizza_bomb/suicide_act(mob/user)
 /obj/item/device/powersink
@@ -11096,6 +11210,7 @@
 /obj/item/device/tape
 /obj/item/device/tape/attack_self(mob/user)
 /obj/item/device/tape/attackby(obj/item/I, mob/user, params)
+/obj/item/device/tape/fire_act()
 /obj/item/device/tape/fix()
 /obj/item/device/tape/random/New()
 /obj/item/device/tape/ruin()
@@ -11109,6 +11224,7 @@
 /obj/item/device/taperecorder/eject(mob/user)
 /obj/item/device/taperecorder/empty/New()
 /obj/item/device/taperecorder/examine(mob/user)
+/obj/item/device/taperecorder/fire_act()
 /obj/item/device/taperecorder/update_icon()
 /obj/item/device/taperecorder/verb/ejectverb()
 /obj/item/device/taperecorder/verb/play()
@@ -11620,6 +11736,13 @@
 /obj/item/projectile/energy/electrode/on_range()
 /obj/item/projectile/energy/floramut
 /obj/item/projectile/energy/florayield
+/obj/item/projectile/energy/net
+/obj/item/projectile/energy/net/New()
+/obj/item/projectile/energy/net/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/energy/net/on_range()
+/obj/item/projectile/energy/trap
+/obj/item/projectile/energy/trap/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/energy/trap/on_range()
 /obj/item/projectile/fire()
 /obj/item/projectile/hivebotbullet
 /obj/item/projectile/ion
@@ -11793,6 +11916,7 @@
 /obj/item/seeds/weeds
 /obj/item/seeds/wheatseed
 /obj/item/seeds/whitebeetseed
+/obj/item/shred(var/bomb,var/shock,var/mob/living/carbon/human/Human)
 /obj/item/singularity_pull(S, current_size)
 /obj/item/slime_extract
 /obj/item/slime_extract/New()
@@ -11949,6 +12073,7 @@
 /obj/item/stack/spacecash/c500
 /obj/item/stack/tile
 /obj/item/stack/tile/attackby(obj/item/W as obj, mob/user as mob, params)
+/obj/item/stack/tile/bluespace
 /obj/item/stack/tile/carpet
 /obj/item/stack/tile/grass
 /obj/item/stack/tile/light
@@ -11964,6 +12089,7 @@
 /obj/item/stack/tile/plasteel
 /obj/item/stack/tile/plasteel/New(var/loc, var/amount=null)
 /obj/item/stack/tile/plasteel/cyborg
+/obj/item/stack/tile/sepia
 /obj/item/stack/tile/wood
 /obj/item/stack/use(var/used)
 /obj/item/stack/wrapping_paper
@@ -12113,6 +12239,7 @@
 /obj/item/toy/redbutton/attack_self(mob/user)
 /obj/item/toy/snappop
 /obj/item/toy/snappop/Crossed(H as mob|obj)
+/obj/item/toy/snappop/fire_act()
 /obj/item/toy/snappop/throw_impact(atom/hit_atom)
 /obj/item/toy/spinningtoy
 /obj/item/toy/sword
@@ -12594,6 +12721,13 @@
 /obj/item/weapon/crowbar/red
 /obj/item/weapon/crowbar/suicide_act(mob/user)
 /obj/item/weapon/cultivator
+/obj/item/weapon/deck
+/obj/item/weapon/deck/New()
+/obj/item/weapon/deck/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+/obj/item/weapon/deck/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
+/obj/item/weapon/deck/attack_self(var/mob/user as mob)
+/obj/item/weapon/deck/attackby(obj/O as obj, mob/user as mob)
+/obj/item/weapon/deck/dealTo(mob/living/target, mob/living/source)
 /obj/item/weapon/defibrillator
 /obj/item/weapon/defibrillator/CheckParts()
 /obj/item/weapon/defibrillator/Destroy()
@@ -12828,6 +12962,7 @@
 /obj/item/weapon/grenade/attack_paw(mob/user as mob)
 /obj/item/weapon/grenade/attack_self(mob/user as mob)
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+/obj/item/weapon/grenade/burn()
 /obj/item/weapon/grenade/chem_grenade
 /obj/item/weapon/grenade/chem_grenade/Crossed(atom/movable/AM)
 /obj/item/weapon/grenade/chem_grenade/HasProximity(atom/movable/AM)
@@ -12982,6 +13117,7 @@
 /obj/item/weapon/gun/energy/gun/advtaser/cyborg/New()
 /obj/item/weapon/gun/energy/gun/advtaser/cyborg/process()
 /obj/item/weapon/gun/energy/gun/attack_self(mob/living/user as mob)
+/obj/item/weapon/gun/energy/gun/dragnet
 /obj/item/weapon/gun/energy/gun/hos
 /obj/item/weapon/gun/energy/gun/nuclear
 /obj/item/weapon/gun/energy/gun/nuclear/Destroy()
@@ -13259,6 +13395,18 @@
 /obj/item/weapon/gun/syringe/rapidsyringe
 /obj/item/weapon/gun/toggle_gunlight()
 /obj/item/weapon/gun/update_gunlight(var/mob/user = null)
+/obj/item/weapon/hand
+/obj/item/weapon/hand/Destroy()
+/obj/item/weapon/hand/New(loc)
+/obj/item/weapon/hand/Topic(href, href_list[], datum/html_interface_client/hclient)
+/obj/item/weapon/hand/attack_self(var/mob/user as mob)
+/obj/item/weapon/hand/attackby(obj/O as obj, mob/user as mob)
+/obj/item/weapon/hand/examine()
+/obj/item/weapon/hand/hiIsValidClient(datum/html_interface_client/hclient)
+/obj/item/weapon/hand/update_conceal()
+/obj/item/weapon/hand/update_icon()
+/obj/item/weapon/hand/verb/discard(datum/playingcard/card in cards)
+/obj/item/weapon/hand/verb/toggle_conceal()
 /obj/item/weapon/hand_labeler
 /obj/item/weapon/hand_labeler/afterattack(atom/A, mob/user,proximity)
 /obj/item/weapon/hand_labeler/attack_self(mob/user)
@@ -13304,6 +13452,8 @@
 /obj/item/weapon/implant/explosive
 /obj/item/weapon/implant/explosive/activate(var/cause)
 /obj/item/weapon/implant/explosive/get_data()
+/obj/item/weapon/implant/explosive/macro
+/obj/item/weapon/implant/explosive/macro/activate(var/cause)
 /obj/item/weapon/implant/explosive/trigger(emote, mob/source)
 /obj/item/weapon/implant/freedom
 /obj/item/weapon/implant/freedom/activate()
@@ -13395,14 +13545,11 @@
 /obj/item/weapon/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 /obj/item/weapon/lighter/attack_self(mob/living/user)
 /obj/item/weapon/lighter/dropped(mob/user)
-/obj/item/weapon/lighter/grayscale
-/obj/item/weapon/lighter/grayscale/New()
+/obj/item/weapon/lighter/greyscale
+/obj/item/weapon/lighter/greyscale/New()
 /obj/item/weapon/lighter/pickup(mob/user)
 /obj/item/weapon/lighter/process()
-/obj/item/weapon/lighter/random
-/obj/item/weapon/lighter/random/New()
 /obj/item/weapon/lighter/update_icon()
-/obj/item/weapon/lighter/zippo
 /obj/item/weapon/lipstick
 /obj/item/weapon/lipstick/attack(mob/M, mob/user)
 /obj/item/weapon/lipstick/attack_self(mob/user)
@@ -13541,10 +13688,8 @@
 /obj/item/weapon/paper/addtofield(id, text, links = 0)
 /obj/item/weapon/paper/attack(mob/M, mob/user)
 /obj/item/weapon/paper/attack_ai(mob/living/silicon/ai/user)
-/obj/item/weapon/paper/attack_hand()
 /obj/item/weapon/paper/attack_self(mob/user)
 /obj/item/weapon/paper/attackby(obj/item/weapon/P, mob/living/carbon/human/user, params)
-/obj/item/weapon/paper/burn(var/showmsg, var/burntime)
 /obj/item/weapon/paper/ccaMemo
 /obj/item/weapon/paper/centcom
 /obj/item/weapon/paper/clearpaper()
@@ -13555,6 +13700,7 @@
 /obj/item/weapon/paper/crumpled/update_icon()
 /obj/item/weapon/paper/djstation
 /obj/item/weapon/paper/examine(mob/user)
+/obj/item/weapon/paper/extinguish()
 /obj/item/weapon/paper/fire_act()
 /obj/item/weapon/paper/gravity_gen
 /obj/item/weapon/paper/hydroponics
@@ -13594,10 +13740,12 @@
 /obj/item/weapon/paper_bin/attack_hand(mob/user)
 /obj/item/weapon/paper_bin/attack_paw(mob/user)
 /obj/item/weapon/paper_bin/attackby(obj/item/weapon/paper/i, mob/user, params)
+/obj/item/weapon/paper_bin/burn()
 /obj/item/weapon/paper_bin/examine(mob/user)
+/obj/item/weapon/paper_bin/fire_act()
 /obj/item/weapon/paper_bin/update_icon()
 /obj/item/weapon/pen
-/obj/item/weapon/pen/attack(mob/living/M, mob/user)
+/obj/item/weapon/pen/attack(mob/living/M, mob/user,var/stealth)
 /obj/item/weapon/pen/blue
 /obj/item/weapon/pen/gang
 /obj/item/weapon/pen/gang/attack(mob/living/M, mob/user)
@@ -13788,9 +13936,11 @@
 /obj/item/weapon/reagent_containers/food/drinks/coffee
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/attackby(var/obj/item/I, mob/user as mob, params)
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/burn()
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/filled/New()
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/filled/cola
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/filled/soda
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/fire_act()
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/on_reagent_change()
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass/on_reagent_change()
@@ -14625,7 +14775,12 @@
 /obj/item/weapon/restraints/legcuffs
 /obj/item/weapon/restraints/legcuffs/beartrap
 /obj/item/weapon/restraints/legcuffs/beartrap/Crossed(AM as mob|obj)
+/obj/item/weapon/restraints/legcuffs/beartrap/New()
 /obj/item/weapon/restraints/legcuffs/beartrap/attack_self(mob/user as mob)
+/obj/item/weapon/restraints/legcuffs/beartrap/energy
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/New()
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/attack_hand(mob/user)
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/dropped()
 /obj/item/weapon/restraints/legcuffs/beartrap/suicide_act(mob/user)
 /obj/item/weapon/retractor
 /obj/item/weapon/retractor/alien
@@ -14696,6 +14851,8 @@
 /obj/item/weapon/shield/riot/tele/attack_self(mob/living/user)
 /obj/item/weapon/shovel
 /obj/item/weapon/shovel/spade
+/obj/item/weapon/sleeping_carp_scroll
+/obj/item/weapon/sleeping_carp_scroll/attack_self(mob/living/carbon/human/user as mob)
 /obj/item/weapon/slimemutator
 /obj/item/weapon/slimemutator/attack(mob/living/simple_animal/slime/M as mob, mob/user as mob)
 /obj/item/weapon/slimestabilizer
@@ -14859,6 +15016,7 @@
 /obj/item/weapon/storage/backpack/genetics
 /obj/item/weapon/storage/backpack/holding
 /obj/item/weapon/storage/backpack/holding/can_be_inserted(obj/item/W, stop_messages = 0, mob/user)
+/obj/item/weapon/storage/backpack/holding/content_can_dump(atom/dest_object, mob/user)
 /obj/item/weapon/storage/backpack/holding/failcheck(mob/user as mob)
 /obj/item/weapon/storage/backpack/holding/handle_item_insertion(obj/item/W, prevent_warning = 0, mob/user)
 /obj/item/weapon/storage/backpack/holding/singularity_act(current_size)
@@ -14976,6 +15134,8 @@
 /obj/item/weapon/storage/box/condimentbottles/New()
 /obj/item/weapon/storage/box/cups
 /obj/item/weapon/storage/box/cups/New()
+/obj/item/weapon/storage/box/cyber_implants
+/obj/item/weapon/storage/box/cyber_implants/New()
 /obj/item/weapon/storage/box/deputy
 /obj/item/weapon/storage/box/deputy/New()
 /obj/item/weapon/storage/box/disks
@@ -15058,10 +15218,12 @@
 /obj/item/weapon/storage/box/syndie_kit/emp/New()
 /obj/item/weapon/storage/box/syndie_kit/imp_adrenal
 /obj/item/weapon/storage/box/syndie_kit/imp_adrenal/New()
-/obj/item/weapon/storage/box/syndie_kit/imp_explosive
-/obj/item/weapon/storage/box/syndie_kit/imp_explosive/New()
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom/New()
+/obj/item/weapon/storage/box/syndie_kit/imp_macrobomb
+/obj/item/weapon/storage/box/syndie_kit/imp_macrobomb/New()
+/obj/item/weapon/storage/box/syndie_kit/imp_microbomb
+/obj/item/weapon/storage/box/syndie_kit/imp_microbomb/New()
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink/New()
 /obj/item/weapon/storage/box/syndie_kit/space
@@ -15082,15 +15244,23 @@
 /obj/item/weapon/storage/close(mob/user)
 /obj/item/weapon/storage/close_all()
 /obj/item/weapon/storage/content_can_dump(atom/dest_object, mob/user)
+/obj/item/weapon/storage/crayons
+/obj/item/weapon/storage/crayons/New()
+/obj/item/weapon/storage/crayons/attackby(obj/item/W as obj, mob/user as mob, params)
+/obj/item/weapon/storage/crayons/update_icon()
 /obj/item/weapon/storage/do_quick_empty()
 /obj/item/weapon/storage/dropped(mob/user)
 /obj/item/weapon/storage/emp_act(severity)
-/obj/item/weapon/storage/fancy/
+/obj/item/weapon/storage/fancy
+/obj/item/weapon/storage/fancy/New()
 /obj/item/weapon/storage/fancy/candle_box
-/obj/item/weapon/storage/fancy/candle_box/New()
 /obj/item/weapon/storage/fancy/cigarettes
 /obj/item/weapon/storage/fancy/cigarettes/New()
 /obj/item/weapon/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/weapon/storage/fancy/cigarettes/cigars
+/obj/item/weapon/storage/fancy/cigarettes/cigars/cohiba
+/obj/item/weapon/storage/fancy/cigarettes/cigars/havana
+/obj/item/weapon/storage/fancy/cigarettes/cigars/update_icon()
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_carp
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_midori
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_robust
@@ -15104,22 +15274,10 @@
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W, atom/new_location)
 /obj/item/weapon/storage/fancy/cigarettes/update_icon()
-/obj/item/weapon/storage/fancy/cigars
-/obj/item/weapon/storage/fancy/cigars/New()
-/obj/item/weapon/storage/fancy/cigars/cohiba
-/obj/item/weapon/storage/fancy/cigars/havana
-/obj/item/weapon/storage/fancy/cigars/update_icon()
-/obj/item/weapon/storage/fancy/crayons
-/obj/item/weapon/storage/fancy/crayons/New()
-/obj/item/weapon/storage/fancy/crayons/attackby(obj/item/W as obj, mob/user as mob, params)
-/obj/item/weapon/storage/fancy/crayons/update_icon()
 /obj/item/weapon/storage/fancy/donut_box
-/obj/item/weapon/storage/fancy/donut_box/New()
 /obj/item/weapon/storage/fancy/egg_box
-/obj/item/weapon/storage/fancy/egg_box/New()
 /obj/item/weapon/storage/fancy/examine(mob/user)
 /obj/item/weapon/storage/fancy/rollingpapers
-/obj/item/weapon/storage/fancy/rollingpapers/New()
 /obj/item/weapon/storage/fancy/rollingpapers/update_icon()
 /obj/item/weapon/storage/fancy/update_icon(var/itemremoved = 0)
 /obj/item/weapon/storage/firstaid
@@ -15156,6 +15314,7 @@
 /obj/item/weapon/storage/part_replacer
 /obj/item/weapon/storage/part_replacer/afterattack(obj/machinery/T as obj, mob/living/carbon/human/user as mob, flag, params)
 /obj/item/weapon/storage/part_replacer/bluespace
+/obj/item/weapon/storage/part_replacer/bluespace/content_can_dump(atom/dest_object, mob/user)
 /obj/item/weapon/storage/part_replacer/play_rped_sound()
 /obj/item/weapon/storage/photo_album
 /obj/item/weapon/storage/pill_bottle
@@ -15241,7 +15400,9 @@
 /obj/item/weapon/tank/bomb_assemble(W,user)
 /obj/item/weapon/tank/check_status()
 /obj/item/weapon/tank/examine(mob/user)
+/obj/item/weapon/tank/get_ui_data()
 /obj/item/weapon/tank/ignite()
+/obj/item/weapon/tank/interact(mob/user, ui_key = "main")
 /obj/item/weapon/tank/internals/air
 /obj/item/weapon/tank/internals/air/New()
 /obj/item/weapon/tank/internals/anesthetic
@@ -15287,7 +15448,7 @@
 /obj/item/weapon/tank/remove_air(amount)
 /obj/item/weapon/tank/remove_air_volume(volume_to_return)
 /obj/item/weapon/tank/return_air()
-/obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main")
+/obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/item/weapon/teleportation_scroll
 /obj/item/weapon/teleportation_scroll/Topic(href, href_list)
 /obj/item/weapon/teleportation_scroll/apprentice
@@ -15313,6 +15474,10 @@
 /obj/item/weapon/twohanded
 /obj/item/weapon/twohanded/
 /obj/item/weapon/twohanded/attack_self(mob/user as mob)
+/obj/item/weapon/twohanded/bostaff
+/obj/item/weapon/twohanded/bostaff/IsShield()
+/obj/item/weapon/twohanded/bostaff/attack(mob/target, mob/living/user)
+/obj/item/weapon/twohanded/bostaff/update_icon()
 /obj/item/weapon/twohanded/dropped(mob/user as mob)
 /obj/item/weapon/twohanded/dualsaber
 /obj/item/weapon/twohanded/dualsaber/IsReflect()
@@ -15535,6 +15700,7 @@
 /obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob, params)
 /obj/machinery/alarm/elect_master()
 /obj/machinery/alarm/emag_act(mob/user as mob)
+/obj/machinery/alarm/get_ui_data(mob/user)
 /obj/machinery/alarm/initialize()
 /obj/machinery/alarm/kitchen_cold_room
 /obj/machinery/alarm/master_is_operating()
@@ -15548,7 +15714,7 @@
 /obj/machinery/alarm/server
 /obj/machinery/alarm/set_frequency(new_frequency)
 /obj/machinery/alarm/shock(mob/user, prb)
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/alarm/update_icon()
 /obj/machinery/allow_drop()
 /obj/machinery/am_shielding
@@ -15625,11 +15791,12 @@
 /obj/machinery/atmospherics/binary/passive_gate/attack_hand(user as mob)
 /obj/machinery/atmospherics/binary/passive_gate/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob, params)
 /obj/machinery/atmospherics/binary/passive_gate/broadcast_status()
+/obj/machinery/atmospherics/binary/passive_gate/get_ui_data()
 /obj/machinery/atmospherics/binary/passive_gate/power_change()
 /obj/machinery/atmospherics/binary/passive_gate/process_atmos()
 /obj/machinery/atmospherics/binary/passive_gate/receive_signal(datum/signal/signal)
 /obj/machinery/atmospherics/binary/passive_gate/set_frequency(new_frequency)
-/obj/machinery/atmospherics/binary/passive_gate/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/atmospherics/binary/passive_gate/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/atmospherics/binary/passive_gate/update_icon_nopipes()
 /obj/machinery/atmospherics/binary/pipeline_expansion(datum/pipeline/P)
 /obj/machinery/atmospherics/binary/pump
@@ -15639,17 +15806,19 @@
 /obj/machinery/atmospherics/binary/pump/attack_hand(user as mob)
 /obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob, params)
 /obj/machinery/atmospherics/binary/pump/broadcast_status()
+/obj/machinery/atmospherics/binary/pump/get_ui_data()
 /obj/machinery/atmospherics/binary/pump/on
 /obj/machinery/atmospherics/binary/pump/power_change()
 /obj/machinery/atmospherics/binary/pump/process_atmos()
 /obj/machinery/atmospherics/binary/pump/receive_signal(datum/signal/signal)
 /obj/machinery/atmospherics/binary/pump/set_frequency(new_frequency)
-/obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/atmospherics/binary/pump/update_icon_nopipes()
 /obj/machinery/atmospherics/binary/replacePipenet(datum/pipeline/Old, datum/pipeline/New)
 /obj/machinery/atmospherics/binary/returnPipenet(obj/machinery/atmospherics/A)
 /obj/machinery/atmospherics/binary/returnPipenetAir(datum/pipeline/P)
 /obj/machinery/atmospherics/binary/setPipenet(datum/pipeline/P, obj/machinery/atmospherics/A)
+/obj/machinery/atmospherics/binary/unsafe_pressure_release(var/mob/user,var/pressures)
 /obj/machinery/atmospherics/binary/update_icon()
 /obj/machinery/atmospherics/binary/update_icon_nopipes()
 /obj/machinery/atmospherics/binary/valve
@@ -15671,12 +15840,13 @@
 /obj/machinery/atmospherics/binary/volume_pump/attack_hand(user as mob)
 /obj/machinery/atmospherics/binary/volume_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob, params)
 /obj/machinery/atmospherics/binary/volume_pump/broadcast_status()
+/obj/machinery/atmospherics/binary/volume_pump/get_ui_data()
 /obj/machinery/atmospherics/binary/volume_pump/on
 /obj/machinery/atmospherics/binary/volume_pump/power_change()
 /obj/machinery/atmospherics/binary/volume_pump/process_atmos()
 /obj/machinery/atmospherics/binary/volume_pump/receive_signal(datum/signal/signal)
 /obj/machinery/atmospherics/binary/volume_pump/set_frequency(new_frequency)
-/obj/machinery/atmospherics/binary/volume_pump/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/atmospherics/binary/volume_pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/atmospherics/binary/volume_pump/update_icon_nopipes()
 /obj/machinery/atmospherics/build_network()
 /obj/machinery/atmospherics/can_crawl_through()
@@ -15824,10 +15994,11 @@
 /obj/machinery/atmospherics/trinary/filter/atmosinit()
 /obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob)
 /obj/machinery/atmospherics/trinary/filter/flipped
+/obj/machinery/atmospherics/trinary/filter/get_ui_data()
 /obj/machinery/atmospherics/trinary/filter/power_change()
 /obj/machinery/atmospherics/trinary/filter/process_atmos()
 /obj/machinery/atmospherics/trinary/filter/set_frequency(new_frequency)
-/obj/machinery/atmospherics/trinary/filter/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/atmospherics/trinary/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/atmospherics/trinary/filter/update_icon_nopipes()
 /obj/machinery/atmospherics/trinary/icon_addbroken(var/connected)
 /obj/machinery/atmospherics/trinary/icon_addintact(var/obj/machinery/atmospherics/node, var/connected)
@@ -15836,9 +16007,10 @@
 /obj/machinery/atmospherics/trinary/mixer/Topic(href,href_list)
 /obj/machinery/atmospherics/trinary/mixer/attack_hand(user as mob)
 /obj/machinery/atmospherics/trinary/mixer/flipped
+/obj/machinery/atmospherics/trinary/mixer/get_ui_data()
 /obj/machinery/atmospherics/trinary/mixer/power_change()
 /obj/machinery/atmospherics/trinary/mixer/process_atmos()
-/obj/machinery/atmospherics/trinary/mixer/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/atmospherics/trinary/mixer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/atmospherics/trinary/mixer/update_icon_nopipes()
 /obj/machinery/atmospherics/trinary/nullifyPipenet(datum/pipeline/P)
 /obj/machinery/atmospherics/trinary/pipeline_expansion(datum/pipeline/P)
@@ -15846,6 +16018,7 @@
 /obj/machinery/atmospherics/trinary/returnPipenet(obj/machinery/atmospherics/A)
 /obj/machinery/atmospherics/trinary/returnPipenetAir(datum/pipeline/P)
 /obj/machinery/atmospherics/trinary/setPipenet(datum/pipeline/P, obj/machinery/atmospherics/A)
+/obj/machinery/atmospherics/trinary/unsafe_pressure_release(var/mob/user,var/pressures)
 /obj/machinery/atmospherics/trinary/update_icon()
 /obj/machinery/atmospherics/trinary/update_icon_nopipes()
 /obj/machinery/atmospherics/unary
@@ -15884,6 +16057,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/container_resist()
 /obj/machinery/atmospherics/unary/cryo_cell/examine(mob/user)
 /obj/machinery/atmospherics/unary/cryo_cell/expel_gas()
+/obj/machinery/atmospherics/unary/cryo_cell/get_ui_data()
 /obj/machinery/atmospherics/unary/cryo_cell/heat_gas_contents()
 /obj/machinery/atmospherics/unary/cryo_cell/open_machine()
 /obj/machinery/atmospherics/unary/cryo_cell/power_change()
@@ -15891,7 +16065,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/process_atmos()
 /obj/machinery/atmospherics/unary/cryo_cell/process_occupant()
 /obj/machinery/atmospherics/unary/cryo_cell/relaymove(var/mob/user)
-/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
 /obj/machinery/atmospherics/unary/cryo_cell/verb/move_eject()
 /obj/machinery/atmospherics/unary/default_change_direction_wrench(mob/user, obj/item/weapon/wrench/W)
@@ -15962,6 +16136,7 @@
 /obj/machinery/atmospherics/unary/tank/toxins
 /obj/machinery/atmospherics/unary/tank/toxins/New()
 /obj/machinery/atmospherics/unary/tank/update_icon()
+/obj/machinery/atmospherics/unary/unsafe_pressure_release(var/mob/user,var/pressures)
 /obj/machinery/atmospherics/unary/update_icon()
 /obj/machinery/atmospherics/unary/update_icon_nopipes()
 /obj/machinery/atmospherics/unary/vent_pump
@@ -15996,6 +16171,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/receive_signal(datum/signal/signal)
 /obj/machinery/atmospherics/unary/vent_scrubber/set_frequency(new_frequency)
 /obj/machinery/atmospherics/unary/vent_scrubber/update_icon_nopipes()
+/obj/machinery/atmospherics/unsafe_pressure_release(var/mob/user,var/pressures)
 /obj/machinery/atmospherics/update_icon()
 /obj/machinery/attack_ai(mob/user as mob)
 /obj/machinery/attack_hand(mob/user as mob, var/check_power = 1, var/set_machine = 1)
@@ -16303,6 +16479,7 @@
 /obj/machinery/chem_dispenser/drinks/attackby(var/obj/item/O as obj, var/mob/user as mob)
 /obj/machinery/chem_dispenser/drinks/beer
 /obj/machinery/chem_dispenser/ex_act(severity, target)
+/obj/machinery/chem_dispenser/get_ui_data()
 /obj/machinery/chem_dispenser/power_change()
 /obj/machinery/chem_dispenser/process()
 /obj/machinery/chem_dispenser/recharge()
@@ -16314,6 +16491,7 @@
 /obj/machinery/chem_heater/attack_hand(var/mob/user as mob)
 /obj/machinery/chem_heater/attackby(var/obj/item/I as obj, var/mob/user as mob, params)
 /obj/machinery/chem_heater/eject_beaker()
+/obj/machinery/chem_heater/get_ui_data()
 /obj/machinery/chem_heater/power_change()
 /obj/machinery/chem_heater/process()
 /obj/machinery/chem_heater/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null)
@@ -16886,6 +17064,7 @@
 /obj/machinery/dominator/examine(mob/user)
 /obj/machinery/dominator/healthcheck(var/damage)
 /obj/machinery/dominator/mech_melee_attack(obj/mecha/M)
+/obj/machinery/dominator/process()
 /obj/machinery/dominator/set_broken()
 /obj/machinery/door
 /obj/machinery/door/BlockSuperconductivity()
@@ -17096,6 +17275,7 @@
 /obj/machinery/door/window/southleft
 /obj/machinery/door/window/southright
 /obj/machinery/door/window/take_damage(var/damage)
+/obj/machinery/door/window/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 /obj/machinery/door/window/westleft
 /obj/machinery/door/window/westright
 /obj/machinery/doorButtons
@@ -17361,6 +17541,8 @@
 /obj/machinery/gun_turret/take_damage(damage)
 /obj/machinery/gun_turret/update_icon()
 /obj/machinery/gun_turret/validate_target(atom/target)
+/obj/machinery/hiIsValidClient(datum/html_interface_client/hclient)
+/obj/machinery/hiOnHide(datum/html_interface_client/hclient)
 /obj/machinery/hologram
 /obj/machinery/hologram/blob_act()
 /obj/machinery/hologram/ex_act(severity, target)
@@ -17841,6 +18023,7 @@
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
 /obj/machinery/portable_atmospherics/canister/attack_hand(var/mob/user as mob)
 /obj/machinery/portable_atmospherics/canister/attack_paw(var/mob/user as mob)
+/obj/machinery/portable_atmospherics/canister/attack_tk(var/mob/user as mob)
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob, params)
 /obj/machinery/portable_atmospherics/canister/blob_act()
 /obj/machinery/portable_atmospherics/canister/bullet_act(var/obj/item/projectile/Proj)
@@ -17848,7 +18031,9 @@
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/New()
 /obj/machinery/portable_atmospherics/canister/check_change()
 /obj/machinery/portable_atmospherics/canister/ex_act(severity, target)
+/obj/machinery/portable_atmospherics/canister/get_ui_data()
 /obj/machinery/portable_atmospherics/canister/healthcheck()
+/obj/machinery/portable_atmospherics/canister/interact(mob/user, ui_key = "main")
 /obj/machinery/portable_atmospherics/canister/nitrogen
 /obj/machinery/portable_atmospherics/canister/nitrogen/New()
 /obj/machinery/portable_atmospherics/canister/oxygen
@@ -17864,7 +18049,7 @@
 /obj/machinery/portable_atmospherics/canister/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 /obj/machinery/portable_atmospherics/canister/toxins
 /obj/machinery/portable_atmospherics/canister/toxins/New()
-/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/portable_atmospherics/canister/update_icon()
 /obj/machinery/portable_atmospherics/connect(obj/machinery/atmospherics/unary/portables_connector/new_port)
 /obj/machinery/portable_atmospherics/disconnect()
@@ -17946,6 +18131,7 @@
 /obj/machinery/power/apc/ex_act(severity, target)
 /obj/machinery/power/apc/examine(mob/user)
 /obj/machinery/power/apc/get_malf_status(mob/user)
+/obj/machinery/power/apc/get_ui_data(mob/user)
 /obj/machinery/power/apc/init()
 /obj/machinery/power/apc/interact(mob/user)
 /obj/machinery/power/apc/ion_act()
@@ -18069,6 +18255,7 @@
 /obj/machinery/power/smes/disconnect_terminal()
 /obj/machinery/power/smes/emp_act(severity)
 /obj/machinery/power/smes/engineering
+/obj/machinery/power/smes/get_ui_data()
 /obj/machinery/power/smes/log_smes(var/user = "")
 /obj/machinery/power/smes/magical
 /obj/machinery/power/smes/magical/process()
@@ -18106,12 +18293,13 @@
 /obj/machinery/power/solar_control/connect_to_network()
 /obj/machinery/power/solar_control/disconnect_from_network()
 /obj/machinery/power/solar_control/ex_act(severity, target)
+/obj/machinery/power/solar_control/get_ui_data()
 /obj/machinery/power/solar_control/initialize()
 /obj/machinery/power/solar_control/power_change()
 /obj/machinery/power/solar_control/process()
 /obj/machinery/power/solar_control/search_for_connected()
 /obj/machinery/power/solar_control/set_panels(var/cdir)
-/obj/machinery/power/solar_control/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/power/solar_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 /obj/machinery/power/solar_control/update()
 /obj/machinery/power/solar_control/update_icon()
 /obj/machinery/power/supermatter_shard
@@ -18298,7 +18486,7 @@
 /obj/machinery/requests_console/Topic(href, href_list)
 /obj/machinery/requests_console/attack_hand(var/mob/user)
 /obj/machinery/requests_console/attackby(var/obj/item/weapon/O as obj, var/mob/user as mob, params)
-/obj/machinery/requests_console/createmessage(source, title, message, priority, paper)
+/obj/machinery/requests_console/createmessage(source, title, message, priority)
 /obj/machinery/requests_console/power_change()
 /obj/machinery/requests_console/update_icon()
 /obj/machinery/robotic_fabricator
@@ -19186,7 +19374,9 @@
 /obj/structure/bedsheetbin/attack_paw(mob/user as mob)
 /obj/structure/bedsheetbin/attack_tk(mob/user as mob)
 /obj/structure/bedsheetbin/attackby(obj/item/I as obj, mob/user as mob, params)
+/obj/structure/bedsheetbin/burn()
 /obj/structure/bedsheetbin/examine(mob/user)
+/obj/structure/bedsheetbin/fire_act()
 /obj/structure/bedsheetbin/update_icon()
 /obj/structure/bigDelivery
 /obj/structure/bigDelivery/Destroy()
@@ -19352,6 +19542,10 @@
 /obj/structure/closet/crate/secure/emp_act(severity)
 /obj/structure/closet/crate/secure/gear
 /obj/structure/closet/crate/secure/hydrosec
+/obj/structure/closet/crate/secure/loot
+/obj/structure/closet/crate/secure/loot/New()
+/obj/structure/closet/crate/secure/loot/attack_hand(mob/user as mob)
+/obj/structure/closet/crate/secure/loot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 /obj/structure/closet/crate/secure/plasma
 /obj/structure/closet/crate/secure/update_icon()
 /obj/structure/closet/crate/secure/weapon
@@ -19435,8 +19629,6 @@
 /obj/structure/closet/secure_closet/brig/New()
 /obj/structure/closet/secure_closet/captains
 /obj/structure/closet/secure_closet/captains/New()
-/obj/structure/closet/secure_closet/cargotech
-/obj/structure/closet/secure_closet/cargotech/New()
 /obj/structure/closet/secure_closet/chemical
 /obj/structure/closet/secure_closet/chemical/New()
 /obj/structure/closet/secure_closet/courtroom
@@ -19496,8 +19688,6 @@
 /obj/structure/closet/secure_closet/personal/patient/New()
 /obj/structure/closet/secure_closet/quartermaster
 /obj/structure/closet/secure_closet/quartermaster/New()
-/obj/structure/closet/secure_closet/scientist
-/obj/structure/closet/secure_closet/scientist/New()
 /obj/structure/closet/secure_closet/security
 /obj/structure/closet/secure_closet/security/New()
 /obj/structure/closet/secure_closet/security/cargo
@@ -19560,6 +19750,10 @@
 /obj/structure/closet/wardrobe/atmospherics_yellow/New()
 /obj/structure/closet/wardrobe/black
 /obj/structure/closet/wardrobe/black/New()
+/obj/structure/closet/wardrobe/botanist
+/obj/structure/closet/wardrobe/botanist/New()
+/obj/structure/closet/wardrobe/cargotech
+/obj/structure/closet/wardrobe/cargotech/New()
 /obj/structure/closet/wardrobe/chaplain_black
 /obj/structure/closet/wardrobe/chaplain_black/New()
 /obj/structure/closet/wardrobe/chemistry_white
@@ -19572,6 +19766,8 @@
 /obj/structure/closet/wardrobe/green/New()
 /obj/structure/closet/wardrobe/grey
 /obj/structure/closet/wardrobe/grey/New()
+/obj/structure/closet/wardrobe/miner
+/obj/structure/closet/wardrobe/miner/New()
 /obj/structure/closet/wardrobe/mixed
 /obj/structure/closet/wardrobe/mixed/New()
 /obj/structure/closet/wardrobe/orange
@@ -19584,8 +19780,8 @@
 /obj/structure/closet/wardrobe/red/New()
 /obj/structure/closet/wardrobe/robotics_black
 /obj/structure/closet/wardrobe/robotics_black/New()
-/obj/structure/closet/wardrobe/toxins_white
-/obj/structure/closet/wardrobe/toxins_white/New()
+/obj/structure/closet/wardrobe/science_white
+/obj/structure/closet/wardrobe/science_white/New()
 /obj/structure/closet/wardrobe/virology_white
 /obj/structure/closet/wardrobe/virology_white/New()
 /obj/structure/closet/wardrobe/white
@@ -19804,6 +20000,7 @@
 /obj/structure/fireaxecabinet/toggle_lock(mob/user)
 /obj/structure/fireaxecabinet/update_icon()
 /obj/structure/fireaxecabinet/verb/toggle_open()
+/obj/structure/flora
 /obj/structure/flora/ausbushes
 /obj/structure/flora/ausbushes/New()
 /obj/structure/flora/ausbushes/brflowers
@@ -20332,6 +20529,7 @@
 /obj/structure/stool/bed/chair/office/light
 /obj/structure/stool/bed/chair/spin()
 /obj/structure/stool/bed/chair/verb/rotate()
+/obj/structure/stool/bed/chair/wood
 /obj/structure/stool/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 /obj/structure/stool/bed/chair/wood/normal
 /obj/structure/stool/bed/chair/wood/wings
@@ -20545,6 +20743,7 @@
 /proc/cmp_name_dsc(atom/a, atom/b)
 /proc/gang_name(var/gang)
 /proc/get(atom/loc, type)
+/proc/keywords_lookup(var/msg)
 /proc/new_station_name()
 /proc/random_skin_tone()
 /proc/remove_radio_all(var/obj/item/radio)
@@ -20554,6 +20753,7 @@
 /projectile_trajectory(var/src_x, var/src_y, var/rotation, var/angle, var/power)
 /propagate_network(var/obj/O, var/datum/powernet/PN)
 /qdel(var/datum/A)
+/qdeleted(var/datum/A)
 /ran_zone(zone, probability = 80)
 /rand_hex_color()
 /randmut(mob/living/carbon/M, list/candidates, difficulty = 2)
@@ -20863,6 +21063,7 @@
 /turf/simulated/floor/attackby(obj/item/C as obj, mob/user as mob, params)
 /turf/simulated/floor/blob_act()
 /turf/simulated/floor/bluegrid
+/turf/simulated/floor/bluespace
 /turf/simulated/floor/break_tile()
 /turf/simulated/floor/break_tile_to_plating()
 /turf/simulated/floor/burn_tile()
@@ -21014,6 +21215,7 @@
 /turf/simulated/floor/plating/snow/gravsnow/corner
 /turf/simulated/floor/plating/snow/gravsnow/surround
 /turf/simulated/floor/plating/update_icon()
+/turf/simulated/floor/sepia
 /turf/simulated/floor/singularity_pull(S, current_size)
 /turf/simulated/floor/update_icon()
 /turf/simulated/floor/vault
