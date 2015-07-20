@@ -53,7 +53,7 @@
 "aba" = (/obj/machinery/door/airlock/shuttle{name = "Escape Pod Airlock"},/obj/docking_port/mobile/pod{id = "pod1"; name = "escape pod 1"},/turf/simulated/floor/plasteel/shuttle,/area/space)
 "abb" = (/turf/simulated/floor/plating,/obj/structure/shuttle/engine/propulsion/burst,/turf/simulated/wall/shuttle{icon_state = "swall_f9"},/area/space)
 "abc" = (/turf/simulated/wall,/area/hallway/secondary/entry)
-"abd" = (/obj/machinery/door/airlock/shuttle{name = "Escape Pod Airlock"},/obj/docking_port/mobile/pod{id = "pod2"; name = "escape pod 2"},/turf/simulated/floor/plasteel/shuttle,/area/space)
+"abd" = (/obj/machinery/door/airlock/shuttle{name = "Escape Pod Airlock"},/obj/docking_port/mobile/pod{dir = 2; id = "pod2"; name = "escape pod 2"},/turf/simulated/floor/plasteel/shuttle,/area/space)
 "abe" = (/turf/simulated/floor/plating,/area/hallway/secondary/entry{name = "Arrivals Lounge"})
 "abf" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/hallway/secondary/entry{name = "Arrivals Lounge"})
 "abg" = (/obj/structure/closet/emcloset,/obj/machinery/camera{c_tag = "Escape Pod One"; dir = 8},/turf/simulated/floor/plating,/area/hallway/secondary/entry{name = "Arrivals Lounge"})
