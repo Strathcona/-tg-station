@@ -48,6 +48,15 @@
 	pellets = 5
 	variance = 0.8
 
+/obj/item/ammo_casing/shotgun/rubbershot
+	name = "rubber shot"
+	desc = "A shotgun casing filled with densely-packed rubber balls, used to incapacitate crowds from a distance."
+	icon_state = "bshell"
+	projectile_type = /obj/item/projectile/bullet/rpellet
+	pellets = 5
+	variance = 0.8
+	materials = list(MAT_METAL=4000)
+
 
 /obj/item/ammo_casing/shotgun/beanbag
 	name = "beanbag slug"
@@ -187,7 +196,7 @@
 	desc = "A caseless bullet casing."
 
 
-/obj/item/ammo_casing/caseless/fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, params, var/distro, var/quiet)
+/obj/item/ammo_casing/caseless/fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, params, distro, quiet)
 	if (..())
 		loc = null
 		return 1
@@ -235,7 +244,7 @@
 		icon_state = "foamdart_empty"
 		desc = "Its nerf or nothing! ... Although, this one doesn't look too safe."
 
-/obj/item/ammo_casing/caseless/foam_dart/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/ammo_casing/caseless/foam_dart/attackby(obj/item/A, mob/user, params)
 	..()
 	if (istype(A, /obj/item/weapon/screwdriver) && !modified)
 		modified = 1

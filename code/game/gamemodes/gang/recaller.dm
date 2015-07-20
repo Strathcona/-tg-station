@@ -174,7 +174,7 @@
 				dat += "<a href='?src=\ref[src];purchase=dominator'><b>Station Dominator</b></a><br>"
 			else
 				dat += "<b>Station Dominator</b><br>"
-			dat += "<i>(Estimated Takeover Time: [round(max(300,900 - ((round((gang.territory.len/start_state.num_territories)*200, 10) - 60) * 15))/60,1)] minutes)</i><br>"
+			dat += "<i>(Estimated Takeover Time: [round(get_domination_time(gang)/60,0.1)] minutes)</i><br>"
 
 	dat += "<br>"
 	dat += "<a href='?src=\ref[src];choice=refresh'>Refresh</a><br>"
@@ -313,7 +313,7 @@
 	attack_self(usr)
 
 
-/obj/item/device/gangtool/proc/ping_gang(var/mob/user)
+/obj/item/device/gangtool/proc/ping_gang(mob/user)
 	if(!user)
 		return
 	var/message = stripped_input(user,"Discreetly send a gang-wide message.","Send Message") as null|text
@@ -328,14 +328,16 @@
 	if(members.len)
 		var/ping = "<span class='danger'><B><i>[gang.name] [(user.mind in ticker.mode.get_gang_bosses()) ? "Gang Boss" : "Lieutenant"]</i>: [message]</B></span>"
 		for(var/datum/mind/ganger in members)
-			if((ganger.current.z <= 2) && (ganger.current.stat == CONSCIOUS))
+			if(ganger.current && (ganger.current.z <= 2) && (ganger.current.stat == CONSCIOUS))
 				ganger.current << ping
 		for(var/mob/M in dead_mob_list)
 			M << ping
 		log_game("[key_name(user)] Messaged [gang.name] Gang: [message].")
 
 
-/obj/item/device/gangtool/proc/register_device(var/mob/user)
+/obj/item/device/gangtool/proc/register_device(mob/user)
+	if(gang)	//It's already been registered!
+		return
 	if((promotable && (user.mind in ticker.mode.get_gangsters())) || (user.mind in ticker.mode.get_gang_bosses()))
 		gang = user.mind.gang_datum
 		gang.gangtools += src
@@ -391,7 +393,7 @@
 		return 0
 	var/datum/station_state/end_state = new /datum/station_state()
 	end_state.count()
-	if((100 *  start_state.score(end_state)) < 70) //Shuttle cannot be recalled if the station is too damaged
+	if((100 *  start_state.score(end_state)) < 80) //Shuttle cannot be recalled if the station is too damaged
 		user << "<span class='warning'>\icon[src]Error: Station communication systems compromised. Unable to establish connection.</span>"
 		recalling = 0
 		return 0

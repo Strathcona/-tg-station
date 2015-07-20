@@ -316,7 +316,7 @@
 				text += "<a href='?src=\ref[src];gangboss=\ref[G]'>gang leader</a>"
 			text += "<BR>"
 
-		if(gang_colors_pool)
+		if(gang_colors_pool.len)
 			text += "<a href='?src=\ref[src];gang=new'>Create New Gang</a>"
 
 		sections["gang"] = text
@@ -708,7 +708,7 @@
 						new_objective.explanation_text = "Download [target_number] research levels."
 					if("capture")
 						new_objective = new /datum/objective/capture
-						new_objective.explanation_text = "Accumulate [target_number] capture points."
+						new_objective.explanation_text = "Capture [target_number] lifeforms with an energy net. Live, rare specimens are worth more."
 					if("absorb")
 						new_objective = new /datum/objective/absorb
 						new_objective.explanation_text = "Absorb [target_number] compatible genomes."
@@ -831,7 +831,7 @@
 				log_admin("[key_name(usr)] has de-gang'ed [current].")
 
 			if("equip")
-				switch(ticker.mode.equip_gang(current))
+				switch(ticker.mode.equip_gang(current,gang_datum))
 					if(1)
 						usr << "<span class='warning'>Unable to equip territory spraycan!</span>"
 					if(2)
@@ -1261,7 +1261,7 @@
 		ticker.mode.finalize_traitor(src)
 		ticker.mode.greet_traitor(src)
 
-/datum/mind/proc/make_Nuke(var/turf/spawnloc,var/nuke_code,var/leader=0)
+/datum/mind/proc/make_Nuke(turf/spawnloc,nuke_code,leader=0)
 	if(!(src in ticker.mode.syndicates))
 		ticker.mode.syndicates += src
 		ticker.mode.update_synd_icons_added(src)
@@ -1385,14 +1385,14 @@
 	fail |= !ticker.mode.equip_revolutionary(current)
 
 
-/datum/mind/proc/make_Gang(var/datum/gang/G)
+/datum/mind/proc/make_Gang(datum/gang/G)
 	special_role = "[G.name] Gang Boss"
 	G.bosses += src
 	gang_datum = G
 	G.add_gang_hud(src)
 	ticker.mode.forge_gang_objectives(src)
 	ticker.mode.greet_gang(src)
-	ticker.mode.equip_gang(current)
+	ticker.mode.equip_gang(current,G)
 
 /datum/mind/proc/make_Abductor()
 	var/role = alert("Abductor Role ?","Role","Agent","Scientist")
@@ -1447,7 +1447,7 @@
 
 
 
-/datum/mind/proc/AddSpell(var/obj/effect/proc_holder/spell/spell)
+/datum/mind/proc/AddSpell(obj/effect/proc_holder/spell/spell)
 	spell_list += spell
 	if(!spell.action)
 		spell.action = new/datum/action/spell_action
@@ -1458,7 +1458,7 @@
 		spell.action.background_icon_state = spell.action_background_icon_state
 	spell.action.Grant(current)
 	return
-/datum/mind/proc/transfer_actions(var/mob/living/new_character)
+/datum/mind/proc/transfer_actions(mob/living/new_character)
 	if(current && current.actions)
 		for(var/datum/action/A in current.actions)
 			A.Grant(new_character)
