@@ -127,13 +127,8 @@ var/list/admin_verbs_debug = list(
 	/client/proc/test_snap_UI,
 	/client/proc/debugNatureMapGenerator,
 	/client/proc/check_bomb_impacts,
-<<<<<<< HEAD
-	/client/proc/populate_world
-=======
-	/proc/machine_upgrade,
 	/client/proc/populate_world,
 	/client/proc/cmd_display_del_log
->>>>>>> tgstation/master
 	)
 var/list/admin_verbs_possess = list(
 	/proc/possess,
