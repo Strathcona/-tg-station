@@ -8,9 +8,14 @@
 						put_in_active_hand(I)
 						visible_message("<span class='warning'>[src] catches [I]!</span>")
 						throw_mode_off()
-						return
-	..()
+						return 1
+	return ..()
 
+/mob/living/carbon/throw_impact(atom/hit_atom)
+	. = ..()
+	if(hit_atom.density && isturf(hit_atom))
+		Weaken(1)
+		take_organ_damage(10)
 
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
 	if(lying)
