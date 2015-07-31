@@ -380,6 +380,10 @@
 	name = "paper- Smelting Operations Closed"
 	info = "<B>**NOTICE**</B><BR><BR>Smelting operations moved on-station.<BR><BR>Take your unrefined ore to the Redeption Machine in the Delivery Office to redeem points.<BR><BR>--SS13 Command"
 
+/obj/item/weapon/paper/disposals
+	name = "paper- 'What the hell Gary'"
+	info = "<B>What the hell Gary!</B><BR><BR>\nLook, I know there has been a rush to finish things<BR><BR>before the crew are due to come.<BR><BR>That in no way excuses this abomonation of a disposals<BR><BR>stystem we have here. There are SIXTEEN sort<BR><BR>junctions here. What the actual fuck Gary.<BR><BR>There is no time left to reroute disposals but<BR><BR>you better be working overtime after the first shift<BR><BR>to fix this horrifying mess. Does it even work?<BR>\nIf something breaks here I corportate will know about it<BR>\nand it will be your ass on the line. You<BR>\nknow how NT deals with this kind of shit.<BR>\n<BR>\nRegards,<BR>\nJames Clark, Chief Engineer<BR>\n<BR>\nPS.<BR>\nHas anyone gotten Greg's body from the<BR><BR>top of the starboard arm yet? We really shouldn't leave<BR><BR>his shit lying around."
+
 /obj/item/weapon/paper/crumpled
 	name = "paper scrap"
 	icon_state = "scrap"
