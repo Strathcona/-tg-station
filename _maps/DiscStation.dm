@@ -6,8 +6,8 @@ Names of z-level do not matter, but order does greatly, for instances such as ch
 
 #if !defined(MAP_FILE)
 
-        #include "map_files\Discstation\Discstation.dmm"
-        #include "map_files\generic\z2.dmm"
+        #include "map_files\Discstation\Discstation.0.7.8.dmm"
+        #include "map_files\DiscStation\z2.dmm"
         #include "map_files\generic\z3.dmm"
         #include "map_files\generic\z4.dmm"
         #include "map_files\generic\z5.dmm"
