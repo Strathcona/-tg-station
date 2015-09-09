@@ -92,6 +92,12 @@ drovidicorv = Game Master
 Dunc = Game Master
 MMMiracles = Game Master
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 bear1ake = Game Master
+>>>>>>> tgstation/master
+=======
+bear1ake = Game Master
+CoreOverload = Game Master
+Jalleo = Game Master
 >>>>>>> tgstation/master
